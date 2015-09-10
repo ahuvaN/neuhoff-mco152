@@ -1,0 +1,39 @@
+package neuhoff.physics;
+
+public class PythagoreanTheorem {
+
+	private double a, b, c;
+	
+	public PythagoreanTheorem() {
+	}		
+
+	public void setAB(double a, double b) {
+		this.a = a;
+		this.b = b;
+		this.c = Math.sqrt((a * a) + (b * b));
+	}
+
+	public void setAC(double a, double c) {
+		this.a = a;
+		this.c = c;
+		this.b = Math.sqrt((c * c) - (a * a));
+	}
+
+	public void setBC(double b, double c) {
+		this.b = b;
+		this.c = c;
+		this.a = Math.sqrt((c * c) - (b * b));
+	}
+
+	public double getA() {
+		return this.a;
+	}
+
+	public double getB() {
+		return this.b;
+	}
+
+	public double getC() {
+		return this.c;
+	}
+}
