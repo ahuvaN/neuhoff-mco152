@@ -2,14 +2,15 @@ package neuhoff.scrabble;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class ScrabbleDictionary {
 
-	private ArrayList<String> dictionary;
+	private HashSet<String> dictionary;
 
 	public ScrabbleDictionary() {
-		this.dictionary = new ArrayList<String>();
+		this.dictionary = new HashSet<String>();
 		try {
 			Scanner input = new Scanner(new File("./Us.dic"));
 
@@ -26,12 +27,8 @@ public class ScrabbleDictionary {
 	 * @return true if the dictionary contains the word, otherwise false.
 	 */
 	public boolean contains(String word) {
-		for (String d : dictionary) {
-			if (d.contains(word)) {
-				return true;
-			}
-		}
-		return false;
+		
+		return dictionary.contains(word.toLowerCase());
 
 	}
 }

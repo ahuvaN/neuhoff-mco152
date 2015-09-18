@@ -9,7 +9,7 @@ public class ScrabbleDictionaryTest {
 	public void testContains(){
 		ScrabbleDictionary sd = new ScrabbleDictionary();
 		
-		Assert.assertEquals(true, sd.contains("hello"));
+		Assert.assertTrue(sd.contains("hello"));
 		
 		
 	}
