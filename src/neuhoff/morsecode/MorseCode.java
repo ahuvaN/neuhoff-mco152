@@ -5,17 +5,18 @@ import java.util.HashMap;
 public class MorseCode {
 	String[] alphabet;
 	String[] morseCode;
+	HashMap<String, String> map;
 
 	public MorseCode() {
 		this.alphabet = new String[] { "a", "b", "c", "d", "e", "f", "g", "h",
 				"i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
-				"u", "v", "w", "x", "y", "z", " " };
+				"u", "v", "w", "x", "y", "z" };
 		this.morseCode = new String[] { ".-", "-...", "-.-.", "-..", ".",
 				"..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.",
 				"---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--",
-				"-..-", "-.--", "--..", " " };
+				"-..-", "-.--", "--.." };
 
-		HashMap<String, String> map = new HashMap<String, String>();
+		this.map = new HashMap<String, String>();
 
 		for (int i = 0; i < alphabet.length; i++) {
 			map.put(alphabet[i], morseCode[i]);
@@ -28,16 +29,12 @@ public class MorseCode {
 		String[] tokens = message.split("");
 		StringBuilder code = new StringBuilder();
 
-		for (String s : tokens) {
-			for (int i = 0; i < alphabet.length; i++) {
-				if (s.equalsIgnoreCase(alphabet[i])) {
-					code.append(morseCode[i]);
-					code.append(" ");
-					break;
-				} else if (s.contains(" ")) {
-					code.append("  ");
-					break;
-				}
+		for (String abc : tokens) {
+			if (map.containsKey(abc)) {
+				code.append(map.get(abc));
+				code.append(" ");
+			} else {
+				code.append("  ");
 			}
 		}
 
@@ -46,24 +43,19 @@ public class MorseCode {
 
 	public String decode(String code) {
 		String[] tokens = code.split(" ");
-		char[] msg = new char[100];
-		int x = 0;
+		StringBuilder message = new StringBuilder();
 
-		for (int s = 0; s < tokens.length; s++) {
-			for (int i = 0; i < morseCode.length; i++) {
-				if (x < msg.length) {
-					if (tokens[s].equalsIgnoreCase(morseCode[i])) {
-						msg[x++] = alphabet[i].charAt(0);
-						break;
-					} else if (tokens[s].equals("") && tokens[s++].equals("")) {
-						msg[x++] = ' ';
-						break;
-					}
-				}
+		for (int i = 0; i < tokens.length; i++) {
+			if (map.containsKey(tokens[i])) {
+				message.append(map.get(tokens[i]));
+			} else if (!(map.containsKey(tokens[i]))
+					&& !(map.containsKey(tokens[i++]))) {
+				message.append(" ");
 			}
 		}
-		String message = new String(msg);
-		return message.trim();
+
+		return message.toString().trim();
+
 	}
 
 }
