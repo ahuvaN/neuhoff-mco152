@@ -1,21 +1,24 @@
 package neuhoff.scrabble;
 
-import java.io.*;
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashSet;
-import java.util.Scanner;
 
 public class ScrabbleDictionary {
 
 	private HashSet<String> dictionary;
 
-	public ScrabbleDictionary() {
+	public ScrabbleDictionary() throws IOException {
 		this.dictionary = new HashSet<String>();
 		try {
-			Scanner input = new Scanner(new File("./Us.dic"));
+			BufferedReader input = new BufferedReader(
+					new FileReader("./Us.dic"));
 
-			while (input.hasNext()) {
-				this.dictionary.add(input.nextLine());
+			String line;
+			while ((line = input.readLine()) != null) {
+				this.dictionary.add(line);
 			}
 			input.close();
 		} catch (FileNotFoundException e) {
@@ -27,7 +30,7 @@ public class ScrabbleDictionary {
 	 * @return true if the dictionary contains the word, otherwise false.
 	 */
 	public boolean contains(String word) {
-		
+
 		return dictionary.contains(word.toLowerCase());
 
 	}

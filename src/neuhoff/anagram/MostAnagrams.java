@@ -1,12 +1,12 @@
 package neuhoff.anagram;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.util.Collection;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map.Entry;
-import java.util.Scanner;
 
 public class MostAnagrams {
 
@@ -38,23 +38,26 @@ public class MostAnagrams {
 		// creates a hashMap of all the words in the dictionary with a value of
 		// unique product
 		// a second hashMap counts occurrence of each product code
-		HashMap<String, Integer> dictionary = new HashMap<String, Integer>();
-		HashMap<Integer, Integer> counter = new HashMap<Integer, Integer>();
+		HashMap<String, Long> dictionary = new HashMap<String, Long>();
+		HashMap<Long, Integer> counter = new HashMap<Long, Integer>();
 
-		Integer product;
+		Long product;
 		String word;
 		try {
-			Scanner input = new Scanner(new File("./Us.dic"));
-			while (input.hasNext()) {
-				product = 1;
-				word = input.nextLine().toLowerCase();
+			BufferedReader input = new BufferedReader(
+					new FileReader("./Us.dic"));
+			while ((word = input.readLine()) != null) {
+				product = 1L;
+
 				String[] tokens = word.split("");
 				for (int x = 0; x < tokens.length; x++) {
-					product *= primeNumbers.get(tokens[x]);
+					if (primeNumbers.containsKey(tokens[x])) {
+						product *= primeNumbers.get(tokens[x]);
+					}
 				}
 
 				dictionary.put(word, product); // creates a field of word and
-												// unique product
+				// unique product
 
 				// if the product does not yet exist input a new occurrence
 				if (!counter.containsKey(product)) {
@@ -69,12 +72,14 @@ public class MostAnagrams {
 
 		} catch (FileNotFoundException e) {
 			System.out.println(e);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
 		// find which product has the maxNumberOfCounts
 		int maxNumberOfCounts = 0;
-		int maxProduct = 0;
-		for (Integer prod : counter.keySet()) {
+		long maxProduct = 0;
+		for (Long prod : counter.keySet()) {
 			int value = counter.get(prod);
 			if (value > maxNumberOfCounts) {
 				maxNumberOfCounts = value;
@@ -85,11 +90,12 @@ public class MostAnagrams {
 		// display all words that exist in the mostAnagrams group based on
 		// maxNumberOfCounts
 		HashSet<String> set = new HashSet<String>();
-		HashMap<Integer, String> reverseDictionary = new HashMap<Integer, String>();
-		for (Entry<String, Integer> entry : dictionary.entrySet()) {
+		HashMap<Long, String> reverseDictionary = new HashMap<Long, String>();
+		for (Entry<String, Long> entry : dictionary.entrySet()) {
 			reverseDictionary.put(entry.getValue(), entry.getKey());
-			if (dictionary.containsValue(maxProduct))
+			if (dictionary.containsValue(maxProduct)) {
 				set.add(reverseDictionary.get(maxProduct));
+			}
 		}
 		set.remove(null);
 
