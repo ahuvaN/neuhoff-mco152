@@ -17,6 +17,8 @@ public class MostAnagrams {
 		 * unique prime number. Then calculate the product of the string. By the
 		 * fundamental theorem of arithmetic, 2 strings are anagrams if and only
 		 * if their products are the same.
+		 * or you can create a hashmap of sorted array to arraylist of anagrams. 
+		 * printout greatest arrayList.length
 		 */
 
 		String[] alpha = new String[] { "a", "b", "c", "d", "e", "f", "g", "h",
