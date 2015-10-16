@@ -1,4 +1,4 @@
-package neuhoff.physics;
+package neuhoff.quadraticEquation;
 
 import java.awt.Container;
 import java.awt.event.ActionEvent;
@@ -10,6 +10,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import neuhoff.physics.DivideByZeroException;
+import neuhoff.physics.ImaginaryNumberException;
 
 public class QuadraticEquationGUI extends JFrame {
 
@@ -50,7 +53,7 @@ public class QuadraticEquationGUI extends JFrame {
 					double b = Double.parseDouble(inB.getText());
 					double c = Double.parseDouble(inC.getText());
 					q = new QuadraticEquation(a, b, c);
-					Double x = q.getNegativeX();
+					Double x = q.getPositiveX();
 					StringBuilder sb = new StringBuilder();
 					sb.append(x);
 					ansX = new JLabel("x= ");

@@ -1,4 +1,7 @@
-package neuhoff.physics;
+package neuhoff.quadraticEquation;
+
+import neuhoff.physics.DivideByZeroException;
+import neuhoff.physics.ImaginaryNumberException;
 
 import org.junit.Assert;
 import org.junit.Test;

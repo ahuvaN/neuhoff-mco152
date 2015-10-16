@@ -1,4 +1,4 @@
-package neuhoff.physics;
+package neuhoff.pythogoreanTheorem;
 
 public class PythagoreanTheorem {
 

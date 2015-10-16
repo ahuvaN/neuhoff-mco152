@@ -1,4 +1,4 @@
-package neuhoff.physics;
+package neuhoff.pythogoreanTheorem;
 
 import org.junit.Assert;
 import org.junit.Test;
