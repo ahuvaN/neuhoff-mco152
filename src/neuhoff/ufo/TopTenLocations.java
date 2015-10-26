@@ -27,12 +27,12 @@ public class TopTenLocations {
 		HashMap<String, Integer> count = new HashMap<String, Integer>();
 		String key = null;
 		for(int i = 0; i < list.size(); i++){
-			key = list.get(i).getLocation().trim();
+			key = list.get(i).getLocation();
 			int counter = count.containsKey(key) ? count.get(key) : 0;
 			count.put(key, counter + 1);
 		}
 		
-		//reverces the order to get the location from the number of occurences
+		//reverse the order to get the location from the number of occurences
 		HashMap<Integer, String> rev = new HashMap<Integer, String>();
 	    	for(Map.Entry<String, Integer> entry : count.entrySet()){
 	    		rev.put(entry.getValue(), entry.getKey());

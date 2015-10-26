@@ -3,7 +3,6 @@ package neuhoff.quadraticEquation;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -16,6 +15,7 @@ import neuhoff.physics.ImaginaryNumberException;
 
 public class QuadraticEquationGUI extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JLabel labelA, labelB, labelC, ansX, answer;
 	private JTextField inA, inB, inC;
 	private JButton button;
@@ -65,8 +65,7 @@ public class QuadraticEquationGUI extends JFrame {
 					
 										
 				} catch (ImaginaryNumberException | DivideByZeroException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println(e);
 				}
 			}
 		});
