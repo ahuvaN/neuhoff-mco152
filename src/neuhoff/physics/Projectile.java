@@ -25,8 +25,8 @@ public class Projectile {
 		return this.time;
 	}
 	
-	public void setTime() {
-		this.time = time + 1;
+	public void setTime(double time) {
+		this.time = time;
 	}
 
 }
