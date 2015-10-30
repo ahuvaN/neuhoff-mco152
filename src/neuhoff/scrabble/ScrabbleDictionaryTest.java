@@ -9,8 +9,8 @@ public class ScrabbleDictionaryTest {
 
 	@Test
 	public void testContains() throws IOException {
-		ScrabbleDictionary sd = new ScrabbleDictionary();
-
+		ScrabbleDictionary sd = ScrabbleDictionary.getInstance();
+		
 		Assert.assertTrue(sd
 				.contains("pneumonoultramicroscopicsilicovolcanoconiosis"));
 
