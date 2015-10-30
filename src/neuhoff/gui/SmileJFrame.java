@@ -14,11 +14,13 @@ public class SmileJFrame extends JFrame{
 		BorderLayout layout = new BorderLayout();
 		Container container = getContentPane();
 		container.setLayout(layout);
-		container.add(new SmileComponent(), BorderLayout.CENTER);
+		SmileComponent smile = new SmileComponent();
+		container.add(smile, BorderLayout.CENTER);
+		
 	}
 	
 	public static void main (String[] args){
 		new SmileJFrame().setVisible(true);
-	}
+		}
 
 }
