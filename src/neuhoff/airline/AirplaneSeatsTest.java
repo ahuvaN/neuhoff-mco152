@@ -85,7 +85,7 @@ public class AirplaneSeatsTest {
 	 */
 	public void testIsPlaneFullReturnsFalse() {
 		AirplaneSeats seats = new AirplaneSeats(3,4);
-		Assert.assertFalse("Plane is full", seats.isPlaneFull());
+		Assert.assertFalse("Plane is not full", seats.isPlaneFull());
 	}
 	
 	@Test
@@ -94,7 +94,7 @@ public class AirplaneSeatsTest {
 	 */
 	public void testIsPlaneFullReturnsTrue() {
 		AirplaneSeats seats = new AirplaneSeats(3,4);
-		Assert.assertTrue("Plane is not full", seats.isPlaneFull());
+		Assert.assertTrue("Plane is full", seats.isPlaneFull());
 	}
 	
 	@Test
@@ -102,7 +102,8 @@ public class AirplaneSeatsTest {
 	 * Tests that reserveGroup() reserves the correct seats when called on an empty plane.
 	 */
 	public void testReserveGroupOnEmptyPlane() throws NotEnoughSeatsException {
-		Assert.fail("Test not implemented");
+		AirplaneSeats seats = new AirplaneSeats(3,4);
+		Assert.assertEquals("Seats reserved", seats.reserveGroup(2));
 	}
 
 	@Test
