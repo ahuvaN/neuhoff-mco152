@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  * This class is part of an Airline Reservation system. It holds seats that are
@@ -28,6 +29,22 @@ public class AirplaneSeats {
 		this.totalCols = columns;
 		this.airplane = new HashMap<String, Character>();
 		this.seatNames = new ArrayList<String>();
+		fillPlane();
+	}
+	
+	private void fillPlane(){
+		StringBuilder sb = new StringBuilder();
+		String[] alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+		for (int row = 1; row <= totalRows; row++){
+			for (int col = 0; col < totalCols; col++){
+				sb.append(alpha[col]);
+				sb.append(Integer.toString(row));
+				seatNames.add(sb.toString());
+				airplane.put(sb.toString(), 'o');
+				sb.setLength(0);
+			}
+		}
 	}
 
 	/**
@@ -43,7 +60,7 @@ public class AirplaneSeats {
 	public void reserve(String seatName) throws AlreadyReservedException,
 			SeatOutOfBoundsException {
 
-		if (!doesSeatExist(seatName)){
+		if (!airplane.containsKey(seatName)){
 			throw new SeatOutOfBoundsException();
 		} else if (isReserved(seatName)) {
 			throw new AlreadyReservedException();
@@ -60,26 +77,10 @@ public class AirplaneSeats {
 	 * @return true if the seat has been reserved, otherwise false.
 	 */
 	public boolean isReserved(String seatName) {
-		if (airplane.containsKey(seatName)){
-			return airplane.get(seatName) == '#';
-		}
-		else{
-			return false;
-		}
+		return airplane.get(seatName) == '#';
 	}
 	
-	private void fillPlane(){
-		StringBuilder sb = new StringBuilder();
-		for (int row = 0; row < totalRows; row++){
-			for (int col = 0; col < totalCols; col++){
-				sb.replace(0, 0, Character.toString ((char) ((char) col + 65)));
-				sb.replace(1,1,Integer.toString(col));
-				seatNames.add(sb.toString());
-				airplane.put(sb.toString(), 'o');
-			}
-		}
-	}
-
+	
 	/** 
 	 * Reserve all seats in the array of seatNames. This is provided her for
 	 * convenience of testing. Do not modify this method.
@@ -105,7 +106,12 @@ public class AirplaneSeats {
 	 * @return a String representation of reserved and empty seats on the plane
 	 *         in the form of.
 	 * 
-	 *         ABCD\n 1 #oo#\n 2 #ooo\n 3 ###o\n 4 ##oo\n 5 #ooo\n
+	 *         ABCD\n 
+	 *       1 #oo#\n 
+	 *       2 #ooo\n 
+	 *       3 ###o\n 
+	 *       4 ##oo\n 
+	 *       5 #ooo\n
 	 * 
 	 *         Where o is an empty seat and # is a reserved seat.
 	 * 
@@ -124,38 +130,23 @@ public class AirplaneSeats {
 		for (int col = 65; col < totalCols + 65; col++){
 			sb.append(String.valueOf(Character.toChars(col)));
 		}
+		sb.append("\n");
 		int row = 1;
 		sb.append(row++);
-		sb.append(obj)
-		
-		for (int i = 0; i < seatNames.size(); i++){
-			
-		}
-		/*for (int row = 0; row < totalRows; row++){
-			sb.append(row + 1);
-			sb.append(" ");
-			for (int col = 0; col < totalCols; col++){
+		sb.append(" ");
 				
-				if (airplane.containsKey('#')){
-					sb.append("#");
-				}
-				else{
-					sb.append("o");
-				}
+		for (int i = 0; i <= seatNames.size(); i++){
+			if (i +1 < 1 && seatNames.get(i).charAt(0) != seatNames.get(i - 1).charAt(0)){
+				sb.append("\n");
+				sb.append(row++);
+				sb.append(" ");
 			}
-			sb.append("\n");
-		}*/
-		return null;
+			sb.append(airplane.get(seatNames.get(i)).toString());
+		}
+		
+		return sb.toString();
 	}
 	
-	private boolean doesSeatExist(String seatName){
-		
-		int row = seatName.charAt(1) - '0';
-		int col = (Character.getNumericValue(seatName.charAt(0)) - 9);
-		
-		return !(row > totalRows || col > totalCols || col > 26);
-	}
-
 	/**
 	 * This method is worth 10 points Reserve a group of seats in the same row.
 	 * For instance, on a 3,4 airplane whose "A1" is occupied, calling
@@ -170,7 +161,7 @@ public class AirplaneSeats {
 	public ArrayList<String> reserveGroup(int numberOfSeatsTogether)
 			throws NotEnoughSeatsException {
 		ArrayList<String> group = new ArrayList<String>();
-		if (numberOfSeatsTogether > totalCols){
+		if (numberOfSeatsTogether > totalCols || isPlaneFull()){
 			throw new NotEnoughSeatsException();
 		}
 		//if (airplane.containsKey(key))
@@ -181,11 +172,7 @@ public class AirplaneSeats {
 	 * @return true if the plane is full, otherwise false.
 	 */
 	public boolean isPlaneFull() {
-		return false;
+		return !airplane.containsValue('o');
 	}
 
-	public static void main (String[] args){
-		
-	}
-	
 }

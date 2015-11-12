@@ -92,8 +92,11 @@ public class AirplaneSeatsTest {
 	/**
 	 * Tests that isFullPlane() returns true if there are no empty seats on the plane. 
 	 */
-	public void testIsPlaneFullReturnsTrue() {
+	public void testIsPlaneFullReturnsTrue() throws AlreadyReservedException, SeatOutOfBoundsException {
 		AirplaneSeats seats = new AirplaneSeats(3,4);
+		seats.reserveAll("A1", "B1", "C1", "D1");
+		seats.reserveAll("A2", "B2", "C2", "D2");
+		seats.reserveAll("A3", "B3", "C3", "D3");
 		Assert.assertTrue("Plane is full", seats.isPlaneFull());
 	}
 	
@@ -103,7 +106,7 @@ public class AirplaneSeatsTest {
 	 */
 	public void testReserveGroupOnEmptyPlane() throws NotEnoughSeatsException {
 		AirplaneSeats seats = new AirplaneSeats(3,4);
-		Assert.assertEquals("Seats reserved", seats.reserveGroup(2));
+		Assert.assertEquals("seats reserved", seats.reserveGroup(2));
 	}
 
 	@Test
