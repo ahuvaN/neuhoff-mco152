@@ -15,7 +15,7 @@ public class AirplaneSeats {
 
 	private int totalRows;
 	private int totalCols;
-	private HashMap<String, Character> airplane;
+	private HashMap<String, Boolean> airplane;
 	private ArrayList<String> seatNames;
 	
 	/**
@@ -27,7 +27,7 @@ public class AirplaneSeats {
 	public AirplaneSeats(int rows, int columns) {
 		this.totalRows = rows;
 		this.totalCols = columns;
-		this.airplane = new HashMap<String, Character>();
+		this.airplane = new HashMap<String, Boolean>();
 		this.seatNames = new ArrayList<String>();
 		fillPlane();
 	}
@@ -41,7 +41,7 @@ public class AirplaneSeats {
 				sb.append(alpha[col]);
 				sb.append(Integer.toString(row));
 				seatNames.add(sb.toString());
-				airplane.put(sb.toString(), 'o');
+				airplane.put(sb.toString(), false);
 				sb.setLength(0);
 			}
 		}
@@ -66,7 +66,7 @@ public class AirplaneSeats {
 			throw new AlreadyReservedException();
 		}
 		else{
-		airplane.put(seatName, '#');
+		airplane.put(seatName, true);
 		} 
 	}
 
@@ -77,7 +77,7 @@ public class AirplaneSeats {
 	 * @return true if the seat has been reserved, otherwise false.
 	 */
 	public boolean isReserved(String seatName) {
-		return airplane.get(seatName) == '#';
+		return airplane.get(seatName);
 	}
 	
 	
@@ -165,7 +165,7 @@ public class AirplaneSeats {
 			throw new NotEnoughSeatsException();
 		}
 		//if (airplane.containsKey(key))
-		return null;
+		return group;
 	}
 
 	/**

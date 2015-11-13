@@ -85,7 +85,7 @@ public class AirplaneSeatsTest {
 	 */
 	public void testIsPlaneFullReturnsFalse() {
 		AirplaneSeats seats = new AirplaneSeats(3,4);
-		Assert.assertFalse("Plane is not full", seats.isPlaneFull());
+		Assert.assertFalse("Plane is not full", !seats.isPlaneFull());
 	}
 	
 	@Test
