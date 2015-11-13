@@ -50,6 +50,9 @@ public class UPSDatabase {
 		
 			//put it into new set
 			Set<Package> pkgs = getPackages(location);
+			if (pkgs == null){
+				pkgs = new HashSet<Package>();
+			}
 			pkgs.add(pkg);
 			ups.put(location, pkgs);
 		}
