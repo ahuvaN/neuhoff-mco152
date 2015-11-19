@@ -11,28 +11,29 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-public class Panel extends JPanel {
+public class VisibleBoard extends JPanel {
 
 	private JButton[] grid;
 	private int player;
-	private boolean isWinner, isDraw, exit, newGame; 
-	private Board board; 
-	private Logic logic;
+	private boolean isWinner, isDraw, exit, newGame;
+	private InternalBoard board;
+	private InternalLogic logic;
 	private ImageIcon icon;
 
-	public Panel() {
+	public VisibleBoard() {
 		grid = new JButton[42];
 		player = 1;
 		isWinner = isDraw = exit = newGame = false;
-		board = new Board();
-		logic = new Logic(board);
+		board = new InternalBoard();
+		logic = new InternalLogic(board);
 		setLayout(new GridLayout(6, 7, 2, 2));
 
 		icon = new ImageIcon("connectFour.jpg");
 		for (int i = 0; i < 42; i++) {
 			grid[i] = new JButton();
 			grid[i].setBorder(new LineBorder(Color.BLACK));
-			grid[i].setActionCommand("" + i); //not sure if this is the same as new JButton(" + i);
+			grid[i].setActionCommand("" + i); // not sure if this is the same as
+												// new JButton(" + i);
 			grid[i].setBackground(Color.GRAY);
 			grid[i].addActionListener(new ActionListener() {
 
@@ -43,12 +44,14 @@ public class Panel extends JPanel {
 					int x = board.findNextX(y);
 					if (x != -1) {
 						i = x * 7 + y;
-						grid[i].setBackground(player == 1 ? Color.RED : Color.BLUE);
-						if (logic.playerMove(x, y, player)) { //is there a winner
+						grid[i].setBackground(player == 1 ? Color.RED
+								: Color.BLUE);
+						if (logic.playerMove(x, y, player)) { // is there a
+																// winner
 							isWinner = true;
-						} else if (logic.draw()) { //is there a draw
+						} else if (logic.draw()) { // is there a draw
 							isDraw = true;
-						} else{
+						} else {
 							changePlayer();
 						}
 					} else {
@@ -59,23 +62,23 @@ public class Panel extends JPanel {
 
 				}
 
-							
 			});
 			add(grid[i]);
 		}
 	}
-	
+
 	private void changePlayer() {
 		player = player == 1 ? 2 : 1;
 	}
-		
+
 	public int showWin() {
+		String color = player == 1 ? "Red" : "Blue";
 		StringBuilder winner = new StringBuilder();
-		winner.append("Player ");
-		winner.append(player);
+		winner.append(color);
 		winner.append(" wins");
 		int n = JOptionPane.showConfirmDialog(this, "New Game?",
-				winner.toString(), JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,icon);
+				winner.toString(), JOptionPane.YES_NO_OPTION,
+				JOptionPane.PLAIN_MESSAGE, icon);
 		if (n > 1) {
 			newGame = true;
 		} else {
@@ -86,8 +89,8 @@ public class Panel extends JPanel {
 
 	public int draw() {
 		String draw = "It's a draw";
-		int n = JOptionPane.showConfirmDialog(this, "New Game?",
-				draw, JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, icon);
+		int n = JOptionPane.showConfirmDialog(this, "New Game?", draw,
+				JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, icon);
 		if (n > 1) {
 			newGame = true;
 		} else {
@@ -96,10 +99,10 @@ public class Panel extends JPanel {
 		return n;
 	}
 
-	public int getPlayer(){
+	public int getPlayer() {
 		return player;
 	}
-	
+
 	public boolean isWinner() {
 		return isWinner;
 	}
@@ -116,6 +119,4 @@ public class Panel extends JPanel {
 		return newGame;
 	}
 
-
 }
-

@@ -1,10 +1,10 @@
 package neuhoff.connectFour;
 
-public class Board {
+public class InternalBoard {
 	int[][] board ;
 	int cellsLeft;
 	
-	public Board(){
+	public InternalBoard(){
 		board = new int[6][7];
 		cellsLeft = 0;
 		
