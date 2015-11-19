@@ -1,5 +1,7 @@
 package neuhoff.ups;
 
+import java.util.HashSet;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -51,7 +53,7 @@ public class UPSDatabaseTest {
 		Location loc = new Location(56L, 78L);
 		Package pkg = new Package("1234");
 		ups.addPackageToLocation(location, pkg);
-		Assert.assertNull(ups.getPackages(loc));
+		Assert.assertEquals(new HashSet<Package>() ,ups.getPackages(loc));
 	}
 	
 	@Test

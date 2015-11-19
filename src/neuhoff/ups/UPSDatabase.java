@@ -67,7 +67,7 @@ public class UPSDatabase {
 			return ups.get(location);
 		}
 		else
-			return null;
+			return new HashSet<Package>();
 	}
 	
 	/**
