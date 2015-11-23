@@ -1,10 +1,7 @@
 package neuhoff.airline;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Scanner;
 
 /**
  * This class is part of an Airline Reservation system. It holds seats that are

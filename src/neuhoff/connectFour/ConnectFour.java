@@ -5,7 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
 public class ConnectFour extends JFrame {
-
+	
 	private VisibleBoard panel;
 
 	public ConnectFour() {
