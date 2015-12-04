@@ -3,6 +3,7 @@ package neuhoff.weather;
 public class CurrentWeather {
 	private Weather[] weather;
 	private Main main;
+	private Clouds clouds;
 	private String name;
 	
 	public Weather[] getWeather(){
@@ -11,6 +12,10 @@ public class CurrentWeather {
 	
 	public Main getMain(){
 		return main;
+	}
+	
+	public Clouds getClouds(){
+		return clouds;
 	}
 	
 	public String getName(){
