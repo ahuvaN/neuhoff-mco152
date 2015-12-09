@@ -102,7 +102,8 @@ public class WeatherGUI extends JFrame {
 					sb.append(icon);
 					sb.append(".png");
 					URL url = new URL(sb.toString());
-					BufferedImage image = ImageIO.read(url);
+					BufferedImage image = 
+					enlarge(ImageIO.read(url), 2);
 					label.setIcon(new ImageIcon(image));
 					lineEnd.add(label);
 					humidity.setText("<html> humidity<br> "
@@ -125,6 +126,21 @@ public class WeatherGUI extends JFrame {
 
 	}
 
+	private BufferedImage enlarge(BufferedImage image, int n) {
+        
+       int w = n * image.getWidth();
+       int h = n * image.getHeight();
+        
+       BufferedImage enlargedImage =
+               new BufferedImage(w, h, image.getType());
+        
+       for (int y=0; y < h; ++y)
+           for (int x=0; x < w; ++x)
+               enlargedImage.setRGB(x, y, image.getRGB(x/n, y/n));
+        
+       return enlargedImage;
+   }
+	
 	public static void main(String[] args) {
 		WeatherGUI gui = new WeatherGUI();
 		gui.setVisible(true);
