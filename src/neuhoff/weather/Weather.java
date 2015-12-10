@@ -1,14 +1,14 @@
 package neuhoff.weather;
 
 public class Weather {
-	String description; 
+	String description;
 	String icon;
-	
-	public String getDescription(){
+
+	public String getDescription() {
 		return description;
 	}
-	
-	public String getIcon(){
+
+	public String getIcon() {
 		return icon;
 	}
 }

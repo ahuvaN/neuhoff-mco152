@@ -5,20 +5,20 @@ public class CurrentWeather {
 	private Main main;
 	private Clouds clouds;
 	private String name;
-	
-	public Weather[] getWeather(){
+
+	public Weather[] getWeather() {
 		return weather;
 	}
-	
-	public Main getMain(){
+
+	public Main getMain() {
 		return main;
 	}
-	
-	public Clouds getClouds(){
+
+	public Clouds getClouds() {
 		return clouds;
 	}
-	
-	public String getName(){
+
+	public String getName() {
 		return name;
 	}
 }
