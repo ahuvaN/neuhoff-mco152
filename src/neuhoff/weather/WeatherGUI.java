@@ -26,9 +26,11 @@ import javax.swing.JTextField;
 
 public class WeatherGUI extends JFrame {
 
-	private JLabel zip, name, degrees, humidity, description, cloudCover;
+	private JLabel zip, name, degrees, humidity, description, cloudCover,
+			label;
 	private JTextField inputZip;
-	private String icon;
+
+	// private String icon;
 
 	public WeatherGUI() {
 		setTitle("Weather GUI");
@@ -46,38 +48,16 @@ public class WeatherGUI extends JFrame {
 		Container lineEnd = lineEnd();
 		container.add(lineEnd, BorderLayout.LINE_END);
 
-		JLabel label = new JLabel();
+		label = new JLabel();
+		lineEnd.add(label);
 		Action action = new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					AccessWeather access = new AccessWeather();
-					CurrentWeather weather = access.getAccessWeather(inputZip
-							.getText().trim());
-					name.setText(weather.getName());
-					degrees.setText(weather.getMain().getTempInFarenheit()
-							.toString()
-							+ "\u00b0");
-					icon = weather.getWeather()[0].getIcon();
-					StringBuffer sb = new StringBuffer();
-					sb.append("http://openweathermap.org/img/w/");
-					sb.append(icon);
-					sb.append(".png");
-					URL url = new URL(sb.toString());
-					BufferedImage image = ImageIO.read(url);
-					label.setIcon(new ImageIcon(image));
-					lineEnd.add(label);
-					humidity.setText("Humidity: "
-							+ String.valueOf(weather.getMain().getHumidity())
-							+ "%");
-					description.setText(weather.getWeather()[0]
-							.getDescription());
-					cloudCover.setText("Cloud Cover: "
-							+ String.valueOf(weather.getClouds().getAll()));
-				} catch (IOException e) {
-					zip.setText("Invalid Zip");
-					inputZip.setText("");
-				}
+				String zip = inputZip.getText().trim();
+
+				WeatherThread thread = new WeatherThread(zip, name, degrees,
+						humidity, description, cloudCover, label);
+				thread.start();
 
 			}
 
