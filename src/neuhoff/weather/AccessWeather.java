@@ -16,7 +16,7 @@ public class AccessWeather {
 		StringBuilder builder = new StringBuilder();
 		builder.append("http://api.openweathermap.org/data/2.5/weather?zip=");
 		builder.append(zipCode);
-		builder.append(",us&appid=2de143494c0b295cca9337e1e96b00e0&units=imperial");
+		builder.append(",us&appid=b65b2b490380de20e8b12eb10dd85fb6&units=imperial");
 
 		URL url = new URL(builder.toString());
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
