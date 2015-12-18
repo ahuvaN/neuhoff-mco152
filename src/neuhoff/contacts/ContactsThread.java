@@ -47,6 +47,7 @@ public class ContactsThread extends Thread {
 							String address = contacts[index].getAddress()
 									.toString();
 							String phone = contacts[index].getPhone();
+							
 							ContactInfoGui gui = new ContactInfoGui(name,
 									email, address, phone);
 							gui.setVisible(true);
