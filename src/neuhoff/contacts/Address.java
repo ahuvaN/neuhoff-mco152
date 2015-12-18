@@ -22,15 +22,11 @@ public class Address {
 		return zipcode;
 	}
 
-	public String address() {
-		StringBuffer sb = new StringBuffer();
-		sb.append(suite);
-		sb.append(" ");
-		sb.append(street);
-		sb.append("/n");
-		sb.append(city);
-		sb.append(" ");
-		sb.append(zipcode);
-		return sb.toString();
+	public String line1() {
+		return suite + " " + street;
+	}
+	
+	public String line2(){
+		return city + " " + zipcode;
 	}
 }

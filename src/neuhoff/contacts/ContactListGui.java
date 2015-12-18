@@ -1,6 +1,9 @@
 package neuhoff.contacts;
 
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -25,6 +28,22 @@ public class ContactListGui extends JFrame {
 
 		ContactsThread thread = new ContactsThread(names);
 		thread.start();
+		
+		MouseListener mouseListener = new MouseAdapter() {
+			public void mouseClicked(MouseEvent mouseEvent) {
+				if (mouseEvent.getClickCount() == 2) {
+					int index = names.locationToIndex(mouseEvent
+							.getPoint());
+					if (index >= 0) {
+						Contact contact = thread.getContacts()[index];
+						ContactInfoGui gui = new ContactInfoGui(contact);
+						
+					}
+				}
+			}
+		};
+		names.addMouseListener(mouseListener);
+
 	}
 
 	public static void main(String[] args) {
