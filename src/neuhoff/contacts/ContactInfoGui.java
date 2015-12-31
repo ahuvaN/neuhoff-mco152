@@ -14,7 +14,7 @@ public class ContactInfoGui extends JFrame {
 	public ContactInfoGui(Contact contact) {
 		setTitle("Contact Info");
 		setSize(500, 700);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 		
 		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));

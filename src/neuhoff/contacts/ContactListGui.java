@@ -32,6 +32,7 @@ public class ContactListGui extends JFrame {
 		MouseListener mouseListener = new MouseAdapter() {
 			public void mouseClicked(MouseEvent mouseEvent) {
 				if (mouseEvent.getClickCount() == 2) {
+					//use list.getSelectedIndex
 					int index = names.locationToIndex(mouseEvent
 							.getPoint());
 					if (index >= 0) {
