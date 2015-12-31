@@ -11,14 +11,14 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
 public class ContactListGui extends JFrame {
-	private JList names;
+	private JList<Contact> names;
 
 	public ContactListGui() {
 		setTitle("Contact List");
 		setSize(500, 700);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		names = new JList();
+		names = new JList<Contact>();
 		names.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		names.setLayoutOrientation(JList.VERTICAL);
 		names.setVisibleRowCount(-1);
