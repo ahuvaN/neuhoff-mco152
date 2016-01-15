@@ -1,40 +1,29 @@
 package neuhoff.nypl;
 
-import java.awt.BorderLayout;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
-import javax.swing.JLabel;
 import javax.swing.JList;
-
-
-
 
 import com.google.gson.Gson;
 
-public class SearchThread extends Thread{
+public class SearchThread extends Thread {
 	private String search;
-	private JLabel label;
-	private ArrayList<String> titles;
-	private String[] resultTitles;
+	private String[] titles, apiItemurl;
 	private NYPL nypl;
 	private Result[] results;
-	private NYPLJFrame frame;
 	private JList<String> list;
 
-	public SearchThread(String look, JLabel jLabel, NYPLJFrame parent, JList<String> titlesList) {
+	public SearchThread(String look, JList<String> titlesList, String[] url) {
 		search = look;
-		label = jLabel;
 		nypl = null;
-		titles = new ArrayList<String>();
 		results = null;
-		frame = parent;
 		list = titlesList;
+		apiItemurl = url;
 	}
 
 	public void run() {
@@ -50,7 +39,7 @@ public class SearchThread extends Thread{
 					.openConnection();
 			connection.setRequestProperty("Authorization",
 					"Token token=\"lo34z075x12dgfiw\"");
-			
+
 			InputStream in = connection.getInputStream();
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 
@@ -58,36 +47,29 @@ public class SearchThread extends Thread{
 
 			nypl = gson.fromJson(br, NYPL.class);
 			int size = nypl.getNyplApi().getResponse().getResults().length;
-			
+
 			results = new Result[size];
 			results = nypl.getResults();
-			
-			for(int i = 0; i < results.length; i++){
-				String titleResult = results[i].getTitle();
-				if (titleResult.length() > 30){
-					titleResult = titleResult.substring(0, 30);
+			apiItemurl = new String[size];
+			titles = new String[size];
+			for (int i = 0; i < results.length; i++) {
+				titles[i] = results[i].getTitle();
+				if (titles[i].length() > 30) {
+					titles[i] = titles[i].substring(0, 30);
 				}
-				titles.add(titleResult);
-				String apiItemurl = results[i].getApiItemURL();	
-				
-				/*PictureThread thread = new PictureThread();
-				thread.start();*/
+				apiItemurl[i] = results[i].getApiItemURL();
 			}
-			
-			resultTitles = new String[titles.size()];
-			titles.toArray(resultTitles);
-			
-			list.setListData(resultTitles);
-			
-			
+
+			list.setListData(titles);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
 	
-	public String[] getTitles(){
-		return resultTitles;
+	public String[] getURLS(){
+		return apiItemurl;
 	}
 
 }

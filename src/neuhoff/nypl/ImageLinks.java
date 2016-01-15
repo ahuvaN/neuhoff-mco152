@@ -1,9 +1,9 @@
 package neuhoff.nypl;
 
 public class ImageLinks {
-	private ImageLink[] imageLinks;
+	private ImageLink[] imageLink;
 
-	public ImageLink[] getImageLinks() {
-		return imageLinks;
+	public String getImageLink() {
+		return String.valueOf(imageLink[4]);
 	}
 }

@@ -1,11 +1,13 @@
 package neuhoff.nypl;
 
+import java.net.URL;
+
 public class Result {
-	private String apiItemURL;
+	private URL apiItemURL;
 	private String title;
 	
 	public String getApiItemURL() {
-		return apiItemURL;
+		return String.valueOf(apiItemURL);
 	}
 	public String getTitle() {
 		return title;
